@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def find_first_substring(strings: List[str]):
+def find_first_substring(strings: List[str]) -> str:
     if not strings:
         return ""
     if len(strings) == 1:
@@ -20,12 +20,12 @@ def find_first_substring(strings: List[str]):
     return ""
 
 
-def group_by_common_part(strings, n=3):
+def group_by_common_part(strings, n=3) -> List[str]:
     vectorizer = CountVectorizer(analyzer='char_wb', ngram_range=(n, n))
     X = vectorizer.fit_transform(strings)
     similarity_matrix = cosine_similarity(X)
 
-    similarity_treshold = .5
+    similarity_threshold = .5
 
     groups = []
     assigned = [False] * len(strings)
@@ -38,12 +38,12 @@ def group_by_common_part(strings, n=3):
         assigned[i] = True
 
         for j in range(i+1, len(strings)):
-            if assigned[j] or similarity_matrix[i, j] < similarity_treshold:
+            if assigned[j] or similarity_matrix[i, j] < similarity_threshold:
                 continue
             group.append(strings[j])
             assigned[j] = True
 
         common_part = find_first_substring(group)
-        groups.append(common_part)
+        groups.append((group, common_part))
 
     return groups
