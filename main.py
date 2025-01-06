@@ -26,7 +26,7 @@ def get_urls(names: List[List[str]]) -> List[str]:
             if url != '':
                 add_url_to_file(url)
                 download_image(url, name)
-            time.sleep(0.68)
+            time.sleep(0.68)  # Time to not get banned on shikimori API
 
 
 def download_imgs(urls: List[str]):
