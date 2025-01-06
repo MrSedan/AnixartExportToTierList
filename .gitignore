@@ -3,4 +3,5 @@ __pycache__
 .vscode/*
 !.vscode/settings.json
 animes/*
+!animes/.gitkeep
 temp
